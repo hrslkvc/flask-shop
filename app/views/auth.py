@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import db
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -41,3 +41,10 @@ def login():
         return jsonify({'access_token': token})
 
     return jsonify({'error': 'Invalid credentials'})
+
+
+@auth.route('/current-user', methods=('GET',))
+@jwt_required()
+def current_user():
+    user = User.query.filter_by(username=get_jwt_identity()).first()
+    return jsonify(user.to_dict())

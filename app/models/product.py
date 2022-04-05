@@ -17,6 +17,7 @@ class Product(db.Model):
             'id': self.id,
             'created_at': self.created_at.isoformat(),
             'name': self.name,
-            'username': self.username,
-            'username': self.username,
+            'description': self.description,
+            'price': self.price,
+            'image': self.image,
         }
