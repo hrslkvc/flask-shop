@@ -8,3 +8,9 @@ products = Blueprint('products', __name__, url_prefix='/products')
 def all_products():
     products = Product.query.all()
     return jsonify([product.to_dict() for product in products])
+
+
+@products.route('/<product_id>', methods=('GET',))
+def product(product_id):
+    product = Product.get(product_id)
+    return jsonify(product.to_dict())

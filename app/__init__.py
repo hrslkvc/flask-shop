@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager
 from app.db import db
 from app.models.user import User
 from app.views.auth import auth
+from app.views.products import products
 
 load_dotenv()
 
@@ -23,3 +24,4 @@ CORS(app)
 jwt = JWTManager(app)
 
 app.register_blueprint(auth)
+app.register_blueprint(products)
