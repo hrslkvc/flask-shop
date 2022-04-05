@@ -23,7 +23,7 @@ def register():
         return jsonify(user.to_dict())
 
     except sqlalchemy.exc.IntegrityError:
-        return jsonify({'error': 'User with the provided username already exists'}), 400
+        return jsonify({'error': 'user with the provided username already exists'}), 400
 
 
 @auth.route('/login', methods=('POST',))
@@ -36,11 +36,14 @@ def login():
 
     user = User.query.filter_by(username=username).first()
 
+    if not user:
+        return jsonify({'error': 'Invalid credentials'}), 400
+
     if check_password_hash(user.password, password):
         token = create_access_token(identity=username)
         return jsonify({'access_token': token})
 
-    return jsonify({'error': 'Invalid credentials'})
+    return jsonify({'error': 'Invalid credentials'}), 400
 
 
 @auth.route('/current-user', methods=('GET',))
