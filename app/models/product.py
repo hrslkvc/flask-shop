@@ -11,6 +11,7 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     image = db.Column(db.Text, nullable=False)
+    stock = db.Column(db.Integer, default=0)
 
     def to_dict(self):
         return {
@@ -20,4 +21,5 @@ class Product(db.Model):
             'description': self.description,
             'price': self.price,
             'image': self.image,
+            'stock': self.stock
         }
