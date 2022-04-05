@@ -19,12 +19,12 @@ fake.add_provider(lorem)
 @with_appcontext
 def seed_db():
     db.drop_all()
-    db.create_all()
+    # db.create_all()
 
-    for i in range(20):
-        user = User(username=fake.profile()['username'], password=generate_password_hash('123'))
-        product = Product(name=" ".join(fake.words(2)).title(), description=fake.paragraph(),
-                          price=float(random.randint(10, 100)),
-                          image="404.png")
-        db.session.add_all([user, product])
-        db.session.commit()
+    # for i in range(20):
+    #     user = User(username=fake.profile()['username'], password=generate_password_hash('123'))
+    #     product = Product(name=" ".join(fake.words(2)).title(), description=fake.paragraph(),
+    #                       price=float(random.randint(10, 100)),
+    #                       image="404.png")
+    #     db.session.add_all([user, product])
+    #     db.session.commit()
